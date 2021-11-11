@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+    // 1. Створити масив з 10 чисел (можна використовувати Math.random Та Math.floor). Скласти результат цих чисел в змінній result.
+    let array1 = [11, 22, 33, 44, 55, 66, 77, 88, 99, 100]
+    let result = array1[0] + array1[1] + array1[2] + array1[3] + array1[4] + array1[5] + array1[6] + array1[7] + array1[8] + array1[9]
+    console.log('result is ', result);
+
+    let rand = Math.random() * 5; //5-1 is max for this rand
+    console.log(rand);
+    console.log(Math.floor(rand));  //rounded down
+
+    // 2. Створити об'єкт book з наступними полями  - назва, кількість сторінок, жанр
+    let book1 = {name: 'someName', pages: 10, about: 'horror'}
+
+    // 3. Створити об'єкт book з наступними полями  - назва, кількість сторінок, жанр, автори
+    let book2 = {name: 'someName2', pages: 20, about: 'comedy'}
+
+    // 4. Створити маис об'єктів book з наступними полями  - назва, кількість сторінок, жанр, автори. Вивести кожну книгу як окремий об'єкт
+    let books = [
+        {name: 'Safo', pages: 69, about: 'for Kids', author: 'Me'},
+        {name: 'Bible', pages: 666, about: 'for Dead', author: 'someDude'},
+        {name: 'Ciwil Laws', pages: 1, about: 'for nobody', author: 'JudgeMan'},
+    ]
+    console.log(books[0], books[1], books[2]);
+
+    // 5. Напишіть код, який вираховує площу прямокутника висотою 23см. (змінна height) та шириною 10см (змінна width).
+    // Значення площі зберігати в змінній s.
+    let height = 23;
+    let width = 10;
+    let s = height * width;
+
+
+    // 6. Напиши код, який знаходить об'єм циліндра заввишки 10м (змінна heightC) та діаметром основи 4м (dC),
+    // результат помістіть у змінну v.
+    let heightC = 10;
+    let dC = 4;
+    let v = Math.PI * (dC / 2) ** 2 * heightC
+    console.log('v = ', v);
+
+    // 7. У прямокутного трикутника дві сторони n (зі значенням 3) та m (зі значенням 4).
+    // Знайдіть гіпотенузу k за теоремою Піфагора (потрібно використовувати функцію Math.pow (число, ступінь) або оператор зведення в ступінь **).
+    let n = 3
+    let m = 4
+    k = Math.pow(Math.pow(n, 2) + Math.pow(m, 2), 1 / 2)
+    console.log('k is ', k); //9+16ˆ1/2>>5
+</script>
+</body>
+</html>
