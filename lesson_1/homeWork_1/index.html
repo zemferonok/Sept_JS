@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+    // - Створити змінні. Присвоїти кожному з них значення: 'hello','owu','com', 'ua', 1, 10, -999, 123, 3.14, 2.7, 16, true, false.
+    //     Вивести кожну змінну за допомогою: console.log , alert, document.write
+    // - Переприсвоїти кожній змінній з завдання значення на довільне.
+    //     Вивести кожну змінну за допомогою: console.log , alert, document.write
+    // - Створити 3 змінних firstName, middleName, lastName, наповнити їх своїм ПІБ. З'єднати їх в одну змінну person. (Не об'єкт)
+    // - За допомогою 3х різних prompt() отримати 3 слова які являються вашими Імям, По-Батькові та роками.
+    //     Вивести "Вітаю *Імя* *По батькові*. Тобі *вік* років".
+    // - За допомогою оператора typeof визначити типи наступних змінних та вивести їх в консоль.
+    //     let a = 100; let b = '100'; let c = true;
+    // - Визначити відповідний оператор в виразах що б вийшов відповідний результат.
+    //     В однакових виразах не використовувати однакові оператори!!!
+    //     5 ? 6 -> true
+    // 5 ? 6 -> false
+    // 5 ? 6 -> false
+    // 5 ? 6 -> false
+    // 10 ? 10 -> true
+    // 10 ? 10 -> true
+    // 10 ? 10 -> false
+    // 10 ? 10 -> false
+    // 10 ? 10 -> false
+    // 123 ? '123' -> false
+    // 123 ? '123' -> true
+    //
+    // - Подумайте Какие значения выведет в окно браузера следующий фрагмент кода?  и почему?
+    //     let str = "20";
+    // let a = 5;
+    // document.write(str + a + "<br/>");
+    // document.write(str - a + "<br/>");
+    // document.write(str * "2" + "<br/>");
+    // document.write(str / 2 + "<br/>");
+
+
+    let str1 = 'hello'
+    let str2 = 'owu'
+    let str3 = 'com'
+    let str4 = 'ua'
+    let num1 = 1
+    let num2 = 10
+    let num3 = -999
+    let num4 = 123
+    let num5 = 3.14
+    let num6 = 2.7
+    let num7 = 16
+    let bool1 = true
+    let bool2 = false
+
+    console.log(num1);
+    console.log(num2);
+    console.log(num1 + num2);
+    alert(str1);
+    alert('PAUSE --> .log print sting') //Stop the code until PRESS
+    console.log(str1);
+    console.log(str1 + str2);
+    console.log(str1 + ' ' + str2);
+    console.log(`${str2}@${str3}.${str4}`);
+    console.log(bool1 + str1);  //string
+    console.log(bool1 + num2);  //11 >> 1+10
+    alert(str2+num3)    //string
+    alert(num4-num5)
+    alert(bool1)    //true
+    alert(bool1+bool2)  //1 >> 1+0
+    document.write('<h1>Go HOME!</h1>')
+    document.write(`${str1} ${str2} <br/>`)   //Add just in SCRIPT
+
+    console.log(num6, num7);
+    num6 = 666
+    num7 = 999
+    console.log(num6, num7);
+
+    let firstName = 'Super'
+    let middleName = 'Pretty'
+    let lastName  = 'Girl'
+    let person = firstName+middleName+lastName
+    console.log("I'm a " + person);
+
+    let name = prompt('Give me your FirstNAME!!!', 'defaultFirstName');
+    let fame = prompt('Give me your MiddleNAME!', 'defaultMiddleName')
+    let dame = prompt('Give me your AGE!', 'defaultAge')
+    alert(`Hello ${name} ${fame}. You're ${dame} years old.`)
+
+    let a = 100
+    let b = '100';
+    let c = true
+    console.log('a is ' + typeof a);
+    console.log('b is ' + typeof b);
+    console.log('c is ' + typeof c);
+
+    // 5 < 6 -> true
+    // 5 > 6 -> false
+    // 5 == 6 -> false
+    // 5 === 6 -> false
+    // 10 == 10 -> true
+    // 10 === 10 -> true
+    // 10 != 10 -> false
+    // 10 > 10 -> false
+    // 10 < 10 -> false
+    // 123 === '123' -> false
+    // 123 == '123' -> true
+
+    let str = "20";
+    let num = 5;
+    document.write(str + num + "<br/>");    //205 >> to string
+    document.write(str - num + "<br/>");    //15 >> to number because of minus
+    document.write(str * "2" + "<br/>");    //40 >> to number because of multiply
+    document.write(str / 2 + "<br/>");      //10 >> to number because of divide
+</script>
+</body>
+</html>
