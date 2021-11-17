@@ -8,14 +8,14 @@
 
 <!--template 2.1-->
 <div>
-    NAME- SURNAME- AGE- INFO- <img src="PHOTO" alt="">
+<!--    NAME- SURNAME- AGE- INFO- <img src="PHOTO" alt="">-->
 </div>
 
 <!--template 2.2-->
 <div>
     <h2>NAME SURNAME. age is - AGE</h2>
     <p>INFO</p>
-    <img src="PHOTO" alt="">
+<!--    <img src="PHOTO" alt="">-->
 </div>
 <!--
 інші об'єкти з масиву
@@ -74,7 +74,7 @@
     document.write(`<h1>Template 2.1</h1>`);
     for (const simpson of simpsons) {
         document.write('<div>');
-        document.write(`${simpson.name} - ${simpson.surname} - ${simpson.age} - ${simpson.info} - <img src="${simpson.photo}">`);
+        document.write(`${simpson.name} - ${simpson.surname} - ${simpson.age} - ${simpson.info} - <img src="${simpson.photo}" alt="">`);
         document.write('</div>');
     }
     document.write('<hr>');
@@ -84,7 +84,7 @@
         document.write('<div>');
         document.write(`<h2>${simpson.name} - ${simpson.surname}. Age is - ${simpson.age}</h2>`);
         document.write(`<p></p>${simpson.info}</p>`);
-        document.write(`<img src="${simpson.photo}">`);
+        document.write(`<img src="${simpson.photo}" alt="">`);
         document.write('</div>');
     }
     document.write('<hr>');

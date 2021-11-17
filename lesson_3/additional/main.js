@@ -179,3 +179,14 @@ for (let char of arrChar) {
     word = word + char + '(ForOf) ';
 }
 console.log('forOf Word is ', word);
+
+
+let arr1 = [
+    {name: 'Luna', age: 22, status: true},
+    {name: 'Lila', age: 33, status: true},
+    {name: 'Lana', age: 44, status: false},
+];
+let arr2 = [];
+arr2.push(arr1)
+console.log(arr2)
+console.log(arr1);
