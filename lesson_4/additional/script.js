@@ -5,8 +5,8 @@ function logOrSum_Concat() {
     } else if (arguments.length === 1) {
         console.log(arguments[0]);
     } else if (arguments.length > 1) {
-        let result = null;
-        for (const argument of arguments) {  //ForOF не работает на arguments?
+        let result = null;  // С другими определениями работает не корректно
+        for (const argument of arguments) {
             result += argument;
         }
         return result;
@@ -27,11 +27,7 @@ let arrA = [2, 3, 4, 5];
 function sumArray(arr1, arr2) {
     let newArr = [];
     for (let i = 0; i < arr1.length; i++) {
-        for (let j = 0; j < arr2.length; j++) {
-            if (i === j) {
-                newArr[i] = arr1[i] + arr2[j];
-            }
-        }
+        newArr[i] = arr1[i] + arr2[i];
     }
     return newArr;
 }
@@ -42,6 +38,7 @@ console.log('====');
 // - Створити функцію яка приймає масив будь яких объектів, та повертає масив ключів всіх обєктів
 // EXAMPLE:
 let arrOfObj = [{name: 'Dima', age: 13}, {model: 'Camry'}];
+
 // result = [ name, age, model ]
 function keyOfObjInArray(arrOfObj) {
     let arrOfKey = [];
