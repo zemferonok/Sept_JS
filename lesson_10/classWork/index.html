@@ -11,28 +11,148 @@
     //  Cтвоирити кнопку при кліку на яку считується та виводиться на консоль інформація з цих 2х форм.
     //  Кнопка повинна лежати за межами форм (Щоб ьуникнути  перезавантаження сторінки)
     //  Доступ до інпутів через Forms API. Отже дайте формі та інпутам всі необхідні атрибути.
-    let form = document.createElement('form');
-    form.setAttribute('name', 'form');
+    let form1 = document.createElement('form');
+    form1.name = 'form1';
+    document.body.appendChild(form1);
+
+    let input1 = document.createElement('input');
+    input1.name = 'input1';
+    input1.value = 'input 1'
+    form1.appendChild(input1);
+    let input2 = document.createElement('input');
+    input2.name = 'input2';
+    input2.value = 'input 2'
+    form1.appendChild(input2);
+
+    let form2 = form1.cloneNode(true);
+    form2.name = 'form2';
+    document.body.appendChild(form2);
+
+    let btn1 = document.createElement('button');
+    btn1.innerText = 'Log';
+    btn1.onclick = function () {
+        console.log(document.forms.form1.input1.value);
+        console.log(document.forms.form1.input2.value);
+        console.log(document.forms.form2.input1.value);
+        console.log(document.forms.form2.input2.value);
+    }
+    document.body.appendChild(btn1)
 
 
 
-    // - Створити 3 инпута та кнопку. Один визначає кількість рядків, другий - кількість ячеєк, третій вмиіст ячеєк.
-    //     При натисканні кнопки, вся ця інформація зчитується і формується табличка, з відповідним вмістом.
-    // (Додатковачастина для завдання)
-    //
-    //
+
+    // - Створити 3 инпута та кнопку. Один визначає кількість рядків,
+    //  другий - кількість ячеєк, третій вмиіст ячеєк.
+    //  При натисканні кнопки, вся ця інформація зчитується і формується табличка, з відповідним вмістом.
+    let formTable = document.createElement('form');
+    formTable.name = 'formTable';
+    document.body.appendChild(formTable);
+
+    let inputRow = document.createElement('input');
+    inputRow.name = 'inputRow';
+    inputRow.type = 'number';
+    inputRow.placeholder = 'Count of Row';
+    formTable.appendChild(inputRow);
+
+    let inputCol = document.createElement('input');
+    inputCol.name = 'inputCol';
+    inputCol.type = 'number';
+    inputCol.placeholder = 'Count of Col';
+    formTable.appendChild(inputCol);
+
+    let inputVal = document.createElement('input');
+    inputVal.name = 'inputVal';
+    // inputCol.type = 'number';
+    inputVal.placeholder = 'Enter a value';
+    formTable.appendChild(inputVal);
+
+    let inputBtn = document.createElement('button');
+    inputBtn.type = 'button';
+    inputBtn.innerText = 'Create';
+    formTable.appendChild(inputBtn);
+
+    inputBtn.onclick = function () {
+        let table = document.createElement('table');
+        table.border = '1px';
+        document.body.appendChild(table);
+
+        for (let i = 0; i < inputRow.value; i++) {
+            let row = document.createElement('tr');
+            table.appendChild(row);
+            for (let j = 0; j < inputCol.value; j++){
+                let col = document.createElement('td');
+                col.innerText = inputVal.value;
+                row.appendChild(col);
+            }
+        }
+    }
+
+
+
+    // (Додаткова частина для завдання)
     // - Сворити масив не цензцрних слів.
-    //     Сворити інпут текстового типу.
-    //     Якщо людина вводить слово і воно міститься в масиві не цензурних слів
+    // - Сворити інпут текстового типу.
+    // - Якщо людина вводить слово і воно міститься в масиві не цензурних слів
     // кинути алерт з попередженням.
-    //     Перевірку робити при натисканні на кнопку
-    //
-    //
+    // - Перевірку робити при натисканні на кнопку
+    let dirtyWords = ['ass', 'shit', 'flower'];
+
+    let formDirtyWord = document.createElement('form');
+    document.body.appendChild(formDirtyWord);
+
+    let inputDirtyWord = document.createElement('input');
+    inputDirtyWord.type = 'text';
+    inputDirtyWord.placeholder = 'Write a dirty word';
+    formDirtyWord.appendChild(inputDirtyWord);
+
+    let inputDirtyBtn = document.createElement('button');
+    inputDirtyBtn.innerText = 'Check';
+    formDirtyWord.appendChild(inputDirtyBtn);
+
+    inputDirtyBtn.onclick = function () {
+        for (let dirtyWord of dirtyWords) {
+            if (dirtyWord === inputDirtyWord.value) {
+                alert('You have a dirty finger');
+                return;
+            }
+        }
+        alert('All is ok');
+    }
+
     // - Сворити масив не цензцрних слів.
     //     Сворити інпут текстового типу.
     //     Потрібно перевіряти чи не містить ціле речення в собі погані слова.
     //     Кинути алерт з попередженням у випадку якщо містить.
     //     Перевірку робити при натисканні на кнопку
+    let formDirtyWords = document.createElement('form');
+    document.body.appendChild(formDirtyWords);
+
+    let inputDirtyWords = document.createElement('input');
+    inputDirtyWords.type = 'text';
+    inputDirtyWords.placeholder = 'Write a dirty string';
+    formDirtyWords.appendChild(inputDirtyWords);
+
+    let inputDirtyBtn2 = document.createElement('button');
+    inputDirtyBtn2.type = 'button';
+    inputDirtyBtn2.innerText = 'Check';
+    formDirtyWords.appendChild(inputDirtyBtn2);
+
+    inputDirtyBtn2.onclick = function () {
+        let wordsArr = inputDirtyWords.value.split(' ');
+        let back = false;
+        for (let word of wordsArr) {
+            if (back) return;
+            for (let dirtyWord of dirtyWords) {
+                if (back) return;
+                if (dirtyWord === word) {
+                    alert('You have a dirty finger');
+                    back = true;
+                }
+            }
+        }
+        alert('All is ok');
+    }
+
 </script>
 </body>
 </html>
