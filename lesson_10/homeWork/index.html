@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HW10</title>
+</head>
+<body>
+
+<script>
+    // - Создать произвольный елемент с id = text.
+    // Используя JavaScript, сделайте так, чтобы при клике на кнопку исчезал элемент с id="text".
+    let elementId = document.createElement('h1');
+    elementId.setAttribute('id', 'text');
+    elementId.innerText = 'Some Text';
+    document.body.appendChild(elementId);
+
+    let btn = document.createElement("button");
+    btn.innerText = 'Remove element';
+    document.body.appendChild(btn);
+    btn.onclick = () => {
+        let element = document.getElementById('text');
+        // document.body.removeChild(element);
+        // element.remove();
+        element.hidden = true;
+    }
+
+    // - Создайте кнопку, при клике на которую, она будет скрывать сама себя.
+    let btnSelfKiller = document.createElement("button");
+    btnSelfKiller.innerText = 'Hidden Myself';
+    document.body.appendChild(btnSelfKiller);
+    btnSelfKiller.onclick = () => {
+        btnSelfKiller.hidden = true;
+    }
+
+    // - створити інпут який приймає вік людини та кнопку яка підтверджує дію.
+    // При натисканні на кнопку зчитати інформацію з інпуту та перевірити вік чи меньше він ніж 18,
+    // та повідомити про це користувача
+    let form1 = document.createElement("form");
+    form1.name = 'form1';
+    document.body.appendChild(form1);
+
+    let input1 = document.createElement("input");
+    input1.name = 'age';
+    input1.type = 'number';
+    form1.appendChild(input1);
+
+    let btnF1 = document.createElement("button");
+    btnF1.innerText = 'Check age';
+    form1.appendChild(btnF1);
+
+    form1.onsubmit = function (event) {
+        event.preventDefault();
+        if (form1.age.value >= 18) {
+            alert('Older than 18');
+        } else {
+            alert('Younger than 18');
+        }
+    }
+
+    // - Создайте меню, которое раскрывается/сворачивается при клике
+    let title = document.createElement('h1');
+    title.innerText = 'Menu List';
+    document.body.appendChild(title);
+
+    let menu = document.createElement('div');
+    document.body.appendChild(menu);
+
+    let list1 = document.createElement('h2');
+    list1.innerText = 'List of Menu 1';
+    menu.appendChild(list1);
+    let list2 = document.createElement('h2');
+    list2.innerText = 'List of Menu 2';
+    menu.appendChild(list2);
+    let list3 = document.createElement('h2');
+    list3.innerText = 'List of Menu 3';
+    menu.appendChild(list3);
+
+
+    title.onclick = function () {
+        menu.hidden = !menu.hidden;
+    }
+
+    // - Создать список комментариев , пример объекта коментария - {title : 'lorem', body:'lorem ipsum dolo sit ameti'}.
+    //     Вывести список комментариев в документ, каждый в своем блоке.
+    //     Добавьте каждому комментарию по кнопке для сворачивания его body.
+    let comments = [
+        {title : 'lorem', body:'lorem ipsum dolo sit ameti'},
+        {title : 'lorem', body:'lorem ipsum dolo sit ameti'},
+        {title : 'lorem', body:'lorem ipsum dolo sit ameti'},
+        {title : 'lorem', body:'lorem ipsum dolo sit ameti'},
+    ];
+
+    let commentsList = document.createElement('div');
+    document.body.appendChild(commentsList);
+
+    for (let comment of comments) {
+        let commentItem = document.createElement('div');
+
+        let title = document.createElement('span');
+        title.innerText = comment.title;
+
+        let btn = document.createElement('button');
+        btn.innerText = 'Hidden/Show';
+        btn.onclick = function () {
+            body.hidden = !body.hidden;
+        }
+
+        let body = document.createElement('p');
+        body.innerText = comment.body;
+
+        commentItem.append(title, btn, body);
+        commentsList.appendChild(commentItem);
+    }
+</script>
+</body>
+</html>

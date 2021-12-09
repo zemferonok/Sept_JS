@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <style>
+        * {margin: 0;}
+
+        .target {
+            width: 200px;
+            height: 200px;
+            background: silver;
+        }
+    </style>
+</head>
+<body>
+
+Lesson 10 Events
+
+Preview
+https://www.youtube.com/watch?v=6ayXSX9ZT-0&list=PLY1sAemBLA5xf0kkqvQ5coPc6ReTwCR7q&index=10
+
+lecture
+https://www.youtube.com/watch?v=HY9VXhPzLs8&list=PLY1sAemBLA5y4bAQZGR6-eAyP2TD5l_Io&index=60
+
+--------------------------------------------------------------------------------------------------
+
+<div class="target"></div>
+
+<script>
+    let target = document.getElementsByClassName('target')[0];
+    target.onclick = function () {
+        console.log('click_1');
+    };
+    target.onclick = function () {
+        console.log('click_2');
+    };
+</script>
+- onclick это событие, которое срабатывает при клике на выбранные элемент.
+- Для одного элемента не получится задать два разных срабатывания события при вызове onclick.
+Так как onclick это функция, то второе её определение просто пере-присвоит значение заданное в первый раз.
+
+--------------------------------------------------------------------------------------------------
+
+<div class="target"></div>
+
+<script>
+    target.addEventListener('click', function () {
+        console.log('click_11');
+    });
+    target.addEventListener('click', function () {
+        console.log('click_22');
+    });
+</script>
+
+addEventListener - позволит добавить несколько реакций на одно событие.
+
+--------------------------------------------------------------------------------------------------
+
+<div class="target"></div>
+
+<script>
+    target.onmousemove = function (eventObj) {
+        // console.log(eventObj);    // Объект события с кучей данных
+        let x = eventObj.clientX;   // Положение по Х элемента
+        let y = eventObj.clientY;   // Положение по У элемента
+        console.log(x, y);    //  Вывод координат курсора на объекте
+        this.style.background = `rgb(${x},${y},${x - y})`;
+    };
+</script>
+- EventObject - объект с множеством данных. Инициализируется самостоятельно, достаточно лишь передать его в функцию. Имя/название может быть произвольное.
+(Дать картинку Объекта события)
+
+--------------------------------------------------------------------------------------------------
+
+<form action="/someAction" name="form1">
+    <input type="text" name="username">
+    <input type="number" name="age">
+    <input type="checkbox" name="status">
+    <button>save</button>
+</form>
+- По умолчанию, при нажатии кнопки в форме, происходит перезагрузка страницы.
+
+<script>
+    // Создание обращения к форме с name="form1"
+    let form1 = document.forms.form1;
+    // let form1 = document.forms['form1'];    // Возможно верный вариант обращения
+    form1.onsubmit = function (event1) {    // Отправка формы
+        event1.preventDefault();            //  Отключить перезагрузку.
+        console.log('submit');
+    };
+</script>
+- Событие onsubmit - происходит когда мы отправляем форму, жмем на её кнопку.
+- Метод .preventDefault() позволяет отключить действия по умолчанию.
+- Event1 - объект событий, в них есть много информации, имя произвольное.
+
+<script>
+    //Обращение к полю формы с name="username"
+    form1.username.oninput = function (event2) { //Событие ввода данных
+        console.log(event2);
+        console.log(this.value);  //Вывод значения поля value, введенного
+        this.style.background = this.value;
+    };
+
+    //Обращение к полю формы с name="status"
+    form1.status.onclick = function () {
+        console.log(this.checked);          // Состояние чек-бокса
+    }
+</script>
+
+<script>
+    // Сбор объекта для добавления или отправки
+    form1.onsubmit = function (event) {
+        event.preventDefault();         // Для того, чтобы видеть результат вывода.
+        let name = this.username.value;
+        let age = this.age.value;
+        let status = this.status.checked;
+        console.log({name: name, age: age, status: status});
+    };
+</script>
+
+--------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------------
+
+<script>
+    // MouseEvent
+    target.onclick = function () {console.log('click');};
+    target.ondblclick = function () {console.log('dbl click');};
+    target.onmousedown = function () {console.log('down');};
+    target.onmouseup = function () {console.log('up');};
+    target.onmouseover = function () {console.log('over');};   // Enter in
+    target.onmouseleave = function () {console.log('leave');}; // Leave out
+    target.onmousemove = function () {console.log('move');};
+
+    // KeyboardEvent
+    document.onkeydown = function (e) {console.log(e.key + ' is down');};
+    document.onkeyup = function (e) {console.log(e.key + ' is up');}
+    document.onkeypress = function (e) {console.log(e.key  + ' is press');};
+</script>
+
+--------------------------------------------------------------------------------------------------
+
+<!--Интересные примеры-->
+<script>
+    // Слежка за пользователем
+    document.onclick = function (evObj) {
+        console.log(evObj.target);  // Вывод объекта на который кликнули
+    }
+</script>
+
+<script>
+    // Вложенные события
+    target.onmousedown = function () {
+        document.onmousemove = function (docEvObj) {
+            console.log(`x:${docEvObj.clientX} - y:${docEvObj.clientY}`);
+            document.onmouseup = function () {
+                document.onmousemove = null;
+            }
+        };
+    };
+</script>
+- События могут быть вложенными и одно событие способно инициализировать другое.
+
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+
+</body>
+</html>
