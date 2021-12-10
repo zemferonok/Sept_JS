@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CW11</title>
+</head>
+<body>
+
+<script>
+    let parse = JSON.parse(localStorage.getItem('favorites'));
+    let favorites = parse || [];
+
+    for (let user of favorites) {
+        let div = document.createElement('div');
+        div.innerText = JSON.stringify(user);
+        document.body.appendChild(div);
+        let button = document.createElement('button');
+        button.innerText = 'remove';
+        div.appendChild(button);
+        button.onclick = () => {
+            favorites = favorites.filter((item) => {
+                if (JSON.stringify(item) !== JSON.stringify(user)) {
+                    return true;
+                }
+            });
+            let stringify = JSON.stringify(favorites);
+            localStorage.setItem('favorites', stringify);
+            location.reload();
+        }
+    }
+
+    let link = document.createElement('a');
+    link.innerHTML = '<h2>to List</h2>';
+    link.href = 'index.html';
+    document.body.appendChild(link);
+</script>
+</body>
+</html>

@@ -50,6 +50,12 @@
             localStorage.setItem('favorites', stringify);
         }
     }
+
+    let link = document.createElement('a');
+    link.innerHTML = '<h2>to Favorites</h2>';
+    link.href = 'favorites.html';
+    document.body.appendChild(link);
+
 </script>
 </body>
 </html>
