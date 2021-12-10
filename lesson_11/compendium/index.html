@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 11</title>
+</head>
+<body>
+
+Lesson 11 BOM JSON (S,L)storage Cookie
+
+// Browser Object Model
+// JSON JavaScriptObjectNotation
+// Session storage
+// Local storage
+// Cookie
+
+Preview
+https://www.youtube.com/watch?v=UFd-Zbs60Rg&list=PLY1sAemBLA5xf0kkqvQ5coPc6ReTwCR7q&index=11
+
+lecture
+https://www.youtube.com/watch?v=1ujbtshYK30&list=PLY1sAemBLA5y4bAQZGR6-eAyP2TD5l_Io&index=65
+
+<script>
+    // BOM - Browser Object Model
+    window.location     // Подобъект location объекта window.
+    location.reload();  // Перезагрузить страницу
+    location.href = 'https:// owu.com.ua';  // Перейти на адрес страницы
+    history.forward();  // Вперед по истории
+    history.back();     // Назад по истории
+    console.log(navigator); // Объект с кучей доступной информацией о ПК
+    // Window -  глобальных объект браузера.
+    // Т.к. объект Window глобальный, обращаться к нему не обязательно, можно сразу обращаться к подобъекту.
+
+    // Работа с ссылкой
+    let url = new URL(location.href);
+    let searchDirty = url.search;
+    let search = searchDirty.slice(1);
+
+    // session storage
+    console.log(sessionStorage);
+    sessionStorage.setItem('key', 'value');
+    sessionStorage.getItem('key');
+    // Session storage хранит информацию до тех пор пока активна сессия.
+    // Сессия длится с момента открытия странички и до её закрытия.
+    // Может хранить значения только в виде строк
+    // (Месторасположение) F12>Application>Storage
+
+    // JSON JavaScriptObjectNotation
+    let object = {name: 'Bart', age: 15};
+    let stringify = JSON.stringify(object);     // Преобразовать в строку
+    let parse = JSON.parse(stringify);          // Преобразовать обратно
+    // Функцию таким образом не сохраняет, она исчезает.
+    // Таким образом можно копировать объекты.
+
+
+    // localstorage
+    console.log(localStorage);      // Вывести всё содержимое
+    localStorage.setItem('someKey', 'someObject'); // Добавить элемент
+    localStorage.getItem('someKey');               // Получить элемент
+    localStorage.removeItem('someKey');            // Удалить элемент
+    localStorage.key(0);            // Получить элемент по индексу ключа
+    localStorage.clear();                       // Отчистить хранилище
+    // Local storage хранит информацию на ПК без ограничения по времени.
+
+
+    // cookie
+    document.cookie = 'name=Kokos';     // Добавить
+    document.cookie = 'surName=Abrikos';
+    console.log(document.cookie);       // Вывод всех куков
+    // Cookie хранит информацию определенный отрезок времени
+    document.cookie = 'key=value;max-age=10000;path=/'; // Пример
+    // --max-age    Время жизни в мСек
+    // --path       Доступ в зависимости от директории
+    if (navigator.cookieEnabled === false) {    // Проверка на Куки
+        alert('cookies disabled');
+    }
+
+    // Геолокация
+    // navigator.geolocation.getCurrentPosition()
+    navigator.geolocation.getCurrentPosition(position => {
+        console.log(position.coords.latitude);
+        console.log(position.coords.longitude);
+    })
+    // Google static maps API - позволит добавить карту на сайт.
+
+</script>
+</body>
+</html>
