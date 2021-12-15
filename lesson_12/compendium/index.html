@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 12</title>
+</head>
+<body>
+Lection 12 API - JSONPlaceholder
+
+// Application Programming Interface
+
+Preview
+https://www.youtube.com/watch?v=KS3vMPzgTqQ&list=PLY1sAemBLA5xf0kkqvQ5coPc6ReTwCR7q&index=12
+
+lecture
+https://www.youtube.com/watch?v=fCBcv1XF4v8&list=PLY1sAemBLA5y4bAQZGR6-eAyP2TD5l_Io&index=67
+
+АПИ - позволяет взаимодействовать с данными на "сервере".
+Могут быть реализованы методы Получения, Публикации, Удаления, Замены и Обновления данных.
+Формат получаемого объекта и методы работы на разных АПИ могут отличаться.
+Инструкции по работе с АПИ читаются в его документации.
+
+EndPoint - ссылка по запросу которой получаем некий ответ (объект/данные).
+Request - запрос, response - ответ.
+
+Фиктивный АПИ для тренировок.
+https://reqres.in
+
+Еще один фиктивный АПИ для тренировок.
+https://jsonplaceholder.typicode.com
+
+
+<script>
+    fetch('https://reqres.in/api/users?page=2') //Запрос на сервер по ссылке
+        .then(response => response.json())      //Получение и преобразование ответа
+        .then(value => {                        //Работа с полученным значением
+            console.log(value.data);    //Если получен объект можно его перебрать
+        });
+
+    // GET - получение данных
+    fetch('https://jsonplaceholder.typicode.com/users')
+        .then(someResponse => someResponse.json())
+        .then(someUsersArray => console.log(someUsersArray));
+    //Метод GET используется по умолчанию, потому указывать его не обязательно.
+
+    //POST - публикация данных
+    fetch('https://jsonplaceholder.typicode.com/users',
+        {
+            method: 'POST',         //Метод с которым обращаемся
+            body: JSON.stringify({  //Форматы данных который передаем
+                name: 'vasya',
+                email: 'kava@asd.com'
+            }),
+            headers: {              //Фигня нужная для сервера
+                'Content-type': 'application/json; charset=UTF-8',
+            }
+        })
+        .then(someResponse => someResponse.json())
+        .then(value => console.log(value));
+
+    //DELETE - удаление данных
+    fetch('https://jsonplaceholder.typicode.com/users/1', {
+        method: 'DELETE'
+    });
+
+    // PUT - замена данных
+    fetch('https://jsonplaceholder.typicode.com/users/1',
+        {
+            method: 'PUT',
+            body: JSON.stringify({name: 'kokos'}),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            }
+        })
+        .then(value => value.json())
+        .then(value => console.log(value));
+
+    // PATCH - обновление данных
+    fetch('https://jsonplaceholder.typicode.com/users/1',
+        {
+            method: 'PATCH',
+            body: JSON.stringify({name: 'abrikos'}),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            }
+        })
+        .then(value => value.json())
+        .then(value => console.log(value));
+</script>
+
+-------------------------------------------------------------
+
+//Пример загрузки контента из АПИ по выбору селектора
+
+<select id="page">          //Выпадающее окно выбора
+    <option value="1">page 1</option>   //Вариант 1
+    <option value="2">page 2</option>   //Вариант 2
+</select>
+
+<div class="wrap"></div>
+
+<script>
+    let select = document.getElementById('page');
+    let wrap = document.getElementsByClassName('wrap')[0];
+
+    select.onchange = function () {
+        let pageNumber = this.value;    //Номер страницы от селектора
+        fetch(`https://reqres.in/api/users?page=${pageNumber}`)
+            .then(value => value.json())
+            .then(value => {
+                wrap.innerHTML = '';    //Очистить содержимое
+                let users = value.data;
+                for (const user of users) {
+                    let div = document.createElement('div');
+                    wrap.append(div)
+                    let title = document.createElement('h2');
+                    title.innerText = `${user.first_name} ${user.last_name}`
+                    div.append(title);
+                    let img = document.createElement('img');
+                    img.src = user.avatar;
+                    div.appendChild(img);
+                }
+            });
+    };
+</script>
+
+</body>
+</html>
