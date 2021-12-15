@@ -6,11 +6,93 @@
 </head>
 <body>
 
-1.
-Отримати відповідь з цього ресурсу відповідь, та вивести в документ як в прикладі на занятті
-https://jsonplaceholder.typicode.com/users
-кожному елементу юзера створити кнопку, при клику на яку в окремий блок виводяться всі пости поточного юзера.
-Кожному елементу post створити кнопку, при клику на яку в окремий блок виводяться всі коментарі поточного поста
+<!--1.-->
+<!--Отримати з цього ресурсу відповідь, та вивести в документ як в прикладі на занятті-->
+<!--https://jsonplaceholder.typicode.com/users-->
+<!--кожному елементу юзера створити кнопку, при клику на яку в окремий блок виводяться всі пости поточного юзера.-->
+<!--Кожному елементу post створити кнопку, при клику на яку в окремий блок виводяться всі коментарі поточного поста-->
+
+<script>
+    fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(users => {
+            for (let user of users) {
+                let wrap = document.createElement('div');
+                wrap.style.border = '5px solid';
+                wrap.style.margin = '5px';
+                document.body.appendChild(wrap);
+
+                let userInfo = document.createElement('div');
+                wrap.appendChild(userInfo);
+
+                let button = document.createElement('button');
+                button.innerText = 'more';
+                wrap.appendChild(button);
+
+                let userPosts = document.createElement('div');
+                wrap.appendChild(userPosts);
+
+                for (const key in user) {
+                    let item = document.createElement('p');
+                    item.style.margin = '0px';
+                    item.innerText = key + ' : ' + user[key];
+                    userInfo.appendChild(item);
+
+                    // button.onclick = () => {
+                    //     console.log('user BTN is click');
+                    //     fetch(`https://jsonplaceholder.typicode.com/comments?postId=${user.id}`)
+                    //         .then(response => response.json())
+                    //         .then(comments => {
+                    //             console.log(comments);
+                    //             userPosts.innerText = '';
+                    //             for (const comment of comments) {
+                    //                 let commentDiv = document.createElement('div');
+                    //                 commentDiv.style.borderTop = '5px dashed';
+                    //                 userPosts.appendChild(commentDiv);
+                    //                 for (const key in comment) {
+                    //                     let item = document.createElement('p');
+                    //                     item.innerText = key + ' : ' + comment[key];
+                    //                     commentDiv.appendChild(item);
+                    //                 }
+                    //             }
+                    //         })
+                    // }
+
+                    button.onclick = getPosts(user.id, userPosts);
+                }
+            }
+
+        });
+
+    function getPosts(userId, userPosts) {
+        console.log('user BTN is click');
+        fetch(`https://jsonplaceholder.typicode.com/comments?postId=${userId}`)
+            .then(response => response.json())
+            .then(posts => {
+                console.log('Posts is ' + posts);
+                userPosts.innerText = '';
+                for (const post of posts) {
+                    let postDiv = document.createElement('div');
+                    postDiv.style.borderTop = '5px dashed';
+                    userPosts.appendChild(postDiv);
+                    for (const key in post) {
+                        let item = document.createElement('p');
+                        item.innerText = key + ' : ' + post[key];
+                        postDiv.appendChild(item);
+                    }
+                }
+            })
+    }
+</script>
+
+<!--Запрос пользователей-->
+<!--https://jsonplaceholder.typicode.com/users-->
+
+<!--Посты определенного Пользователя-->
+<!--https://jsonplaceholder.typicode.com/users/3/posts-->
+
+<!--Комменты определенного поста-->
+<!--https://jsonplaceholder.typicode.com/posts/5/comments-->
 
 </body>
 </html>
