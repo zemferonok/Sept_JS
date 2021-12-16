@@ -13,6 +13,89 @@
 <!--Кожному елементу post створити кнопку, при клику на яку в окремий блок виводяться всі коментарі поточного поста-->
 
 <script>
+    // fetch('https://jsonplaceholder.typicode.com/users')
+    //     .then(response => response.json())
+    //     .then(users => {
+    //         for (let user of users) {
+    //             let wrap = document.createElement('div');
+    //             wrap.style.border = '5px solid';
+    //             wrap.style.margin = '5px';
+    //             document.body.appendChild(wrap);
+    //
+    //             let userInfo = document.createElement('div');
+    //             wrap.appendChild(userInfo);
+    //
+    //             let button = document.createElement('button');
+    //             button.innerText = 'more';
+    //             wrap.appendChild(button);
+    //
+    //             let userPosts = document.createElement('div');
+    //             wrap.appendChild(userPosts);
+    //
+    //             for (const key in user) {
+    //                 let item = document.createElement('p');
+    //                 item.style.margin = '0px';
+    //                 item.innerText = key + ' : ' + user[key];
+    //                 userInfo.appendChild(item);
+    //             }
+    //
+    //             button.onclick = () => {
+    //                 console.log('BTN user - ' + user.id);
+    //
+    //                 fetch(`https://jsonplaceholder.typicode.com/users/${user.id}/posts`)
+    //                     .then(response => response.json())
+    //                     .then(posts => {
+    //                         userPosts.innerText = '';
+    //
+    //                         for (const post of posts) {
+    //                             let postDiv = document.createElement('div');
+    //                             postDiv.style.borderTop = '5px dashed';
+    //                             userPosts.appendChild(postDiv);
+    //
+    //                             let postInfo = document.createElement('div');
+    //                             postDiv.appendChild(postInfo);
+    //
+    //                             let button = document.createElement('button');
+    //                             button.innerText = 'more';
+    //                             postDiv.appendChild(button);
+    //
+    //                             let postComments = document.createElement('div');
+    //                             postDiv.appendChild(postComments);
+    //
+    //                             for (const key in post) {
+    //                                 let item = document.createElement('p');
+    //                                 item.innerText = key + ' : ' + post[key];
+    //                                 postInfo.appendChild(item);
+    //                             }
+    //
+    //                             button.onclick = () => {
+    //                                 console.log('BTN post - ' + post.id);
+    //
+    //                                 fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
+    //                                     .then(response => response.json())
+    //                                     .then(comments => {
+    //                                         postComments.innerText = '';
+    //
+    //                                         for (const comment of comments) {
+    //                                             let commentDiv = document.createElement('div');
+    //                                             commentDiv.style.borderTop = '5px dotted';
+    //                                             postComments.appendChild(commentDiv);
+    //
+    //                                             for (const key in comment) {
+    //                                                 let item = document.createElement('p');
+    //                                                 item.style.margin = '0px';
+    //                                                 item.innerText = key + ' : ' + comment[key];
+    //                                                 commentDiv.appendChild(item);
+    //                                             }
+    //                                         }
+    //                                     });
+    //                             }
+    //                         }
+    //                     })
+    //             }
+    //         }
+    //     });
+
     fetch('https://jsonplaceholder.typicode.com/users')
         .then(response => response.json())
         .then(users => {
@@ -20,6 +103,7 @@
                 let wrap = document.createElement('div');
                 wrap.style.border = '5px solid';
                 wrap.style.margin = '5px';
+                wrap.style.background = 'lightblue';
                 document.body.appendChild(wrap);
 
                 let userInfo = document.createElement('div');
@@ -39,63 +123,75 @@
                     userInfo.appendChild(item);
                 }
 
-                button.onclick = () => {
-                    console.log('BTN user - ' + user.id);
-
-                    fetch(`https://jsonplaceholder.typicode.com/users/${user.id}/posts`)
-                        .then(response => response.json())
-                        .then(posts => {
-                            userPosts.innerText = '';
-
-                            for (const post of posts) {
-                                let postDiv = document.createElement('div');
-                                postDiv.style.borderTop = '5px dashed';
-                                userPosts.appendChild(postDiv);
-
-                                let postInfo = document.createElement('div');
-                                postDiv.appendChild(postInfo);
-
-                                let button = document.createElement('button');
-                                button.innerText = 'more';
-                                postDiv.appendChild(button);
-
-                                let postComments = document.createElement('div');
-                                postDiv.appendChild(postComments);
-
-                                for (const key in post) {
-                                    let item = document.createElement('p');
-                                    item.innerText = key + ' : ' + post[key];
-                                    postInfo.appendChild(item);
-                                }
-
-                                button.onclick = () => {
-                                    console.log('BTN post - ' + post.id);
-
-                                    fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
-                                        .then(response => response.json())
-                                        .then(comments => {
-                                            postComments.innerText = '';
-
-                                            for (const comment of comments) {
-                                                let commentDiv = document.createElement('div');
-                                                commentDiv.style.borderTop = '5px dotted';
-                                                postComments.appendChild(commentDiv);
-
-                                                for (const key in comment) {
-                                                    let item = document.createElement('p');
-                                                    item.style.margin = '0px';
-                                                    item.innerText = key + ' : ' + comment[key];
-                                                    commentDiv.appendChild(item);
-                                                }
-                                            }
-                                        });
-                                }
-                            }
-                        })
-                }
+                button.onclick = () => getPosts(user, userPosts);
             }
         });
 
+
+    function getPosts(object, toSave) {
+        console.log('BTN user - ' + object.id);
+
+        fetch(`https://jsonplaceholder.typicode.com/users/${object.id}/posts`)
+            .then(response => response.json())
+            .then(posts => {
+                toSave.innerText = '';
+
+                for (const post of posts) {
+                    let postDiv = document.createElement('div');
+                    postDiv.style.borderTop = '5px dashed';
+                    postDiv.style.background = 'lightgreen';
+                    toSave.appendChild(postDiv);
+
+                    let postInfo = document.createElement('div');
+                    postDiv.appendChild(postInfo);
+
+                    let button = document.createElement('button');
+                    button.innerText = 'more';
+                    postDiv.appendChild(button);
+
+                    let postComments = document.createElement('div');
+                    postComments.style.display = 'flex';
+                    postDiv.appendChild(postComments);
+
+                    for (const key in post) {
+                        let item = document.createElement('p');
+                        item.innerText = key + ' : ' + post[key];
+                        postInfo.appendChild(item);
+                    }
+
+                    button.onclick = () => getComments(post, postComments);
+                }
+            })
+    }
+
+
+    function getComments(object, toSave) {
+        console.log('BTN post - ' + object.id);
+
+        fetch(`https://jsonplaceholder.typicode.com/posts/${object.id}/comments`)
+            .then(response => response.json())
+            .then(comments => {
+                toSave.innerText = '';
+
+                for (const comment of comments) {
+                    let commentDiv = document.createElement('div');
+                    commentDiv.style.borderTop = '5px dotted';
+                    commentDiv.style.borderRight = '5px dotted';
+                    commentDiv.style.boxSizing = 'border-box';
+                    commentDiv.style.width = '20%';
+                    commentDiv.style.padding = '5px';
+                    commentDiv.style.background = 'lightyellow';
+                    toSave.appendChild(commentDiv);
+
+                    for (const key in comment) {
+                        let item = document.createElement('p');
+                        item.style.margin = '0px';
+                        item.innerText = key + ' : ' + comment[key];
+                        commentDiv.appendChild(item);
+                    }
+                }
+            });
+    }
 </script>
 
 <!--Запрос пользователей-->
