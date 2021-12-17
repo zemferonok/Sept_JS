@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AD13</title>
+</head>
+<body>
+
+<form action="" name="f1">
+    <input type="text" name="nameP" placeholder="Name of Product">
+    <input type="number" name="countP" placeholder="Count of Product">
+    <input type="number" name="priceP" placeholder="Price of Product">
+    <input type="text" name="imageP" placeholder="URL of Image">
+    <input type="submit" name="buttonP" value="add">
+</form>
+
+<a href='list.html'> На сторінку для перегляду товарів</a>
+
+<script>
+    // - Імітуємо наповнення інтернет магазину товарами :
+    // Створити форму з наступними полями :
+    // - назва товару
+    // - кількість товару
+    // - ціна товару
+    // - картинка товару (посилання з інтернету)
+
+    // - Зберігати товари в масив в локалсорадж.
+    // При збережені товару з форми, action не повинно відбуватись (preventDefault)
+
+    // - Створити елемент <a href='list.html'> На сторінку товарів</a>.
+    // - Створити list.html, при переході на який відобразити на сторінці всі товари.
+
+    // - На сторінці  list.html побудувати кнопку яка видаляє всі товари з корзини та локалстораджа.
+    // - До кожного товару додати кнопку, при кліку на яку з лс видаляється конкретний обраний  товар
+
+    // let form = document.forms.f1;   //Почему этот вариант обращения подчеркивает?
+    let form = document.forms['f1'];
+    form.onsubmit = (event) => {
+        event.preventDefault();
+        let name = form.nameP.value;
+        let count = form.countP.value;
+        let price = form.priceP.value;
+        let image = form.imageP.value;
+
+        if (!(name && count && price && image)) {
+            alert('Enter all Field');
+            return;
+        }
+
+        let product = {name, count, price, image};
+
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+        products.push(product);
+        localStorage.setItem('products', JSON.stringify(products));
+
+        form.nameP.value = '';
+        form.countP.value = '';
+        form.priceP.value = '';
+        form.imageP.value = '';
+    }
+
+
+</script>
+</body>
+</html>

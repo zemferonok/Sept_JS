@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AD13</title>
+</head>
+<body>
+
+<div class="title">
+    <a href='index.html'> На сторінку для додавання товарів</a>
+    <button>Delete all products</button>
+</div>
+
+
+<script>
+    let title = document.getElementsByClassName('title')[0];
+    title.style.display = 'flex';
+    title.style.justifyContent = 'space-between';
+
+    let button = title.getElementsByTagName('button')[0];
+
+    button.onclick = () => deleteAll();
+
+    let productsArea = document.createElement('div');
+    productsArea.style.display = 'flex';
+    productsArea.style.flexWrap = 'wrap';
+    productsArea.style.rowGap = '5px';
+    productsArea.style.columnGap = '5px';
+    document.body.appendChild(productsArea);
+
+
+    let products = JSON.parse(localStorage.getItem('products'));
+
+    for (const item of products) {
+        let product = document.createElement('div');
+        product.style.boxSizing = 'border-box';
+        product.style.width = '19%';
+        product.style.padding = '10px';
+        product.style.background = 'lightgray';
+        productsArea.appendChild(product);
+
+        let h2 = document.createElement('h2');
+        h2.innerText = item.name;
+        product.appendChild(h2);
+
+        let p = document.createElement('p');
+        p.innerText = `Count : ${item.count} - Price : ${item.price}`;
+        product.appendChild(p);
+
+        let img = document.createElement('img');
+        img.src = item.image;
+        img.alt = 'some alt';
+        img.style.width = '100%';
+        product.appendChild(img);
+
+        let btn = document.createElement('button');
+        btn.innerText = 'delete';
+        product.appendChild(btn);
+
+        btn.onclick = () => deleteProduct(item);
+    }
+
+    function deleteProduct(object) {
+        console.log('Deleting', object);
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+        products = products.filter( item => JSON.stringify(object) !== JSON.stringify(item) );
+        localStorage.setItem('products', JSON.stringify(products));
+        location.reload();
+    }
+
+    function deleteAll(){
+        console.log('Deleting all data');
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+        products.length = 0;
+        localStorage.setItem('products', JSON.stringify(products));
+        location.reload();
+    }
+</script>
+</body>
+</html>
