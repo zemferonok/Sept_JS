@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 14</title>
+</head>
+<body>
+Lesson 14 : Event Loop
+
+setTimeout
+Promise then/catch/finally
+Async/Await thy/catch
+PromiseAll
+PromiseAllSettled
+EarlyReturnPattern
+CallBack function and Hell
+ConsoleTime
+Reduce
+
+<script>
+
+    // setTimeout function
+
+    // setTimeout(() => {      //Асинхронно - через 2 сек
+    //     console.log(1)
+    // }, 2000);
+    //
+    // console.log(2);         //Синхронно - сразу
+    //
+    // setTimeout(() => {      //Принимает на вход callBack
+    //     console.log(3)      //Действие которое будет выполнено
+    // }, 1000);               //Время задержки до выполнения
+    ////Имитация асинхронной функция позволяющая выполнить некоторое действие с отсрочкой.
+
+    //----------------------
+
+    //CallBack function, ?BadExample?
+
+    // //Вариация кривых? колл-беков
+    // function timeOut_1(callBackFunc) {
+    //     setTimeout(() => {
+    //         console.log(1);
+    //         callBackFunc();
+    //     }, 2000);
+    // }
+    //
+    // function timeOut_2(callBackFunc) {
+    //     console.log(2);
+    //     callBackFunc();
+    // }
+    //
+    // function timeOut_3(callBackFunc) {
+    //     setTimeout(() => {
+    //         console.log(3);
+    //         callBackFunc();
+    //     }, 1000);
+    // }
+    //
+    // //CallBack HELL???
+    // timeOut_1(() => {
+    //     timeOut_2(() => {
+    //         timeOut_3(() => {
+    //         })
+    //     })
+    // });
+    //
+    // timeOut_1(() => timeOut_2(() => timeOut_3(() => {})))
+
+
+    //CallBack function and hell
+
+    // function someFn(value, callBack) {
+    //     console.log(value);
+    //     if (value > 0) {
+    //         callBack(null, 'All is good, continue...');
+    //     } else {
+    //         callBack('All is bad', null);
+    //     }
+    // }
+    // //Структура callBack такова, что сперва передается ошибка, а затем данные.
+    // //Это нужно для корректной отработки ошибки, при её наличии.
+    //
+    // someFn(1, (someError, someData) => {    //Вызов первой функции.
+    //     if (someError) {                    //Проверка наличия данных ошибки.
+    //         console.log(someError);         //Значение ошибки.
+    //     } else {
+    //         console.log(someData);          //Значение полученных данный.
+    //         someFn(2, (someError, someData) => {    //Вызов второй функции ...
+    //             if (someError) {
+    //                 console.log(someError);
+    //             } else {
+    //                 console.log(someData);
+    //                 someFn(3, (someError, someData) => {
+    //                     if (someError) {
+    //                         console.log(someError);
+    //                     } else {
+    //                         console.log(someData);
+    //                         someFn(4, (someError, someData) => {
+    //                             if (someError) {
+    //                                 console.log(someError);
+    //                             } else {
+    //                                 console.log(someData);
+    //                                 console.log('All is complete!!!');  //Финал
+    //                             }
+    //                         });
+    //                     }
+    //                 });
+    //             }
+    //         });
+    //     }
+    // });
+
+    //--------------------------------
+
+    // Promise - then/catch/finally EXAMPLE
+
+    // function nameOfFunc(someVal) {
+    //     return new Promise((resolve, reject) => {   //Для построения цепи Then.
+    //         //Здесь пишем наш асинхронный код с использованием resolve, reject.
+    //         //Как только выполнение кода доходит до resolve или reject,
+    //         //дальнейшая работа с кодом прекращается.
+    //         //Resolve и Reject - нечто вроде двух типов Return.
+    //         console.log('Im printing ' + someVal);
+    //         if (someVal) {
+    //             let someGodData = someVal + ' is Positive Answer!';
+    //             resolve(someGodData);   //Positive answer of Promise
+    //         } else {
+    //             let someBadData = someVal + ' is Negative Answer!';
+    //             reject(someBadData);    //Negative answer of Promise
+    //         }
+    //     })
+    // }
+    //
+    // nameOfFunc('Text')
+    //     .then(resVal => nameOfFunc(resVal)) //For transmitting in next need Return
+    //     .then(resVal => nameOfFunc(resVal)) //Catch Positive answer of Promise
+    //     .catch(rejVal => nameOfFunc(rejVal))    //Catch Negative answer of Promise
+    //     .finally(()=> console.log('FINAL'));   //Do this in any variant answer of Promise
+    // //-По умолчанию для стрелочной функции на одно действие уже стоит Return.
+    // //Return передает объект на вход следующего звена Then и активирует его.
+    // //-Если на каком-либо из шагов получаем reject, дальнейшие звенья Then игнорируются.
+    // //Catch отлавливает reject из любого места где он сработал.
+
+    //----------------------------
+
+    // Promise - then/catch/finally ?BadExample?
+
+    // function eatFirst(food) {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             console.log('At first eat ' + food);
+    //             resolve('All is good 1');      //Positive answer of Promise
+    //             reject('Error in 1');       //Negative answer of Promise
+    //         }, 3000);
+    //     })
+    // }
+    //
+    // function eatSecond(food) {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             console.log('At second eat ' + food);
+    //             resolve('All is good 2');
+    //             reject('Error in 2');
+    //         }, 1000);
+    //     })
+    // }
+    //
+    // function eatThird(food) {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             console.log('At third eat ' + food);
+    //             resolve('All is good 3');
+    //             reject('Error in 3');
+    //         }, 2000);
+    //     })
+    // }
+    //
+    // eatFirst('apple')
+    //     .then(resolveVal => {       //Catch Positive answer of Promise
+    //         console.log(resolveVal);
+    //         return eatSecond('tea');    //For transmitting in next Then use Return
+    //     })
+    //     .then(resolveVal => {
+    //         console.log(resolveVal);
+    //         return eatThird('meat');
+    //     })
+    //     .then(resolveVal => console.log(resolveVal))
+    //     .catch(rejectVal => console.log('AHAH LOL ' + rejectVal));  //Catch Negative answer of Promise
+
+    //--------------------
+
+    //Async/await - try/catch
+
+    // function func1(value) {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             if (value > 0) {
+    //                 resolve('Pos - ' + value);  //Positive answer of Promise
+    //             } else {
+    //                 reject('Neg - ' + value);   //Negative answer of Promise
+    //             }
+    //         }, 3000);
+    //     });
+    // }
+    //
+    // async function someFunc() {
+    //     try{    //Код с потенциальными ошибками
+    //         let val1 = await func1(2);
+    //         console.log('val1 is' + val1);
+    //         let val2 = await func1(1);
+    //         console.log('val2 is' + val2);
+    //         let val3 = await func1(0);
+    //         console.log('val3 is' + val3);
+    //         let val4 = await func1(-1);
+    //         console.log('val4 is' + val4);
+    //
+    //         console.log('Fin - 1');
+    //         console.log('Fin - 2');
+    //         console.log('Fin - 3');
+    //     } catch (somErr) {  //Ловит ошибки из Try
+    //         console.log('ERROR', somErr);
+    //     }
+    // }
+    // //Async function, await - работает только для функций с Promise.
+    // //Принципом работы не отличается от then/catch, лишь избавляет от них.
+    // //Await - ждет завершения ф-ции, затем запускает следующую.
+    // // Таким образом асинхронный код выполняется как синхронный.
+    //
+    // someFunc();
+
+    // ---------------------
+
+    //Early return pattern
+
+    // function earlyReturn(a, b) {
+    //     if (a > b) {
+    //         return 'A is bigger';
+    //     }
+    //     if (a < b) {
+    //         return 'B is bigger';
+    //     }
+    //     return 'Fuck OFF';
+    // }
+    // //Return прекращает выполнение функции, потому else можно не использовать.
+
+    //------------------------------
+
+    //PromiseAll
+
+    // const p1 = new Promise((resolve, reject) => resolve(1)); //Fictive Resolve
+    // const p2 = new Promise((resolve, reject) => resolve(2)); //Fictive Resolve
+    // const p3 = new Promise((resolve, reject) => reject(3));  //Fictive Reject
+
+    // Promise.all([p1, p2, p3])
+    //     .then(resolve => console.log(resolve))
+    //     .catch(error => console.log(error));
+    // //Данный метод не подходит для пошаговых Промисов, где каждый следующий зависит от предыдущего.
+    // //Все переданные Промисы начинают своё выполнение одновременно.
+    // //Если хоть один из Промисов даст reject - все остальные будут отменены и ответа не будет.
+    // //Отловить ошибку Промиса можно при помощи catch.
+    //
+    // Promise.all([p1, p2, p3.catch(err => console.log('error - ' + err))])
+    //     .then(resolve => console.log(resolve))
+    //     .catch(error => console.log(error));
+    // //Костыль помогающий поправить ситуацию.
+    // //Отлавливает ошибку еще на этапе инициализации Промиса.
+    // //Словленная ошибка не прекращает работу всего массива Промисов, но дает на своем месте undefined.
+
+
+    //PromiseAllSettled
+
+    // Promise.allSettled([p1, p2, p3])
+    //     .then(res => console.log(res));
+    //Идеальный вариант обработки не пошаговых Промисов.
+    //Каждый Промис возвращается в виде объекта массива со статусом отработки.
+    //Reject не прекращает работу остальных Промисов, лишь указывается в статусе соответствующего объекта.
+
+    //------------------------------
+
+    // console.time('someTime1');
+    // //Код время выполнения которого нужно узнать.
+    // console.timeEnd('someTime1');
+
+    // reduce - познакомиться с методом и разобраться в нем.
+
+
+</script>
+</body>
+</html>
