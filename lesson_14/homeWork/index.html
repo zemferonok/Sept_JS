@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HW14</title>
+</head>
+<body>
+
+<script>
+    //  TODO HW
+    // Зробити свій розпорядок дня. // (CallBack) - (Promise then/catch) - (Async await)
+    // У вас має бути більше 10 асинхронних дій з рандомними затримками.
+    // Вам необхідно синхронізувати всі свої дії за допомогою промісів та async await (Код має бути написаний окремо)
+    // Затримка має бути НЕ в порядку зростання, а будь яка. При тому ваші дії мають бути синхронізовані.
+    // Напиклад.
+    // Прикнутись - 0.3с
+    // Поснідати - 1с
+    // Піти в душ - 0.5с
+    // Дочекатись автобус - 3с
+    // Пообідати - 1с
+    // І так далі
+
+    // // CallBack
+    //
+    // function act1(value, callback) {
+    //     setTimeout(() => {
+    //             console.log('1 Проснулся');
+    //         if (value) {
+    //             callback(null, 'Wake up is done. Work next..');
+    //         } else {
+    //             callback('Error, trouble with WakeUp!');
+    //         }
+    //     }, 3000);
+    // }
+    //
+    // function act2(value, callback) {
+    //     setTimeout(() => {
+    //             console.log('2 Позавтракал');
+    //         if (value) {
+    //             callback(null, 'Dinner is done. Work next..');
+    //         } else {
+    //             callback('Error, trouble with Dinner!');
+    //         }
+    //     }, 5000);
+    // }
+    //
+    // function act3(value, callback) {
+    //     setTimeout(() => {
+    //             console.log('3 Лег спать');
+    //         if (value) {
+    //             callback(null, 'Sleeping is done. Work next..');
+    //         } else {
+    //             callback('Error, trouble with Sleeping!');
+    //         }
+    //     }, 2000);
+    // }
+    //
+    // act1(true, (error, data) => {
+    //     if (error) {
+    //         console.log(error);
+    //     } else {
+    //         console.log(data);
+    //         act2(false, (error, data) => {
+    //             if (error) {
+    //                 console.log(error);
+    //             } else {
+    //                 console.log(data);
+    //                 act3(true, (error, data) => {
+    //                     if (error) {
+    //                         console.log(error);
+    //                     } else {
+    //                         console.log(data);
+    //                         console.log('All work is done!')
+    //                     }
+    //                 });
+    //             }
+    //         });
+    //     }
+    // });
+
+
+    // // Promise
+    //
+    // function act1(value, time) {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             console.log('1 WakeUp');
+    //             if (value) {
+    //                 resolve('All is good, continue...');
+    //             } else {
+    //                 reject('ERROR, mission abort..');
+    //             }
+    //         }, time);
+    //     });
+    // }
+    //
+    // function act2(value, time) {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             console.log('2 Dinner');
+    //             if (value) {
+    //                 resolve('All is good, continue...');
+    //             } else {
+    //                 reject('ERROR, mission abort..');
+    //             }
+    //         }, time);
+    //     });
+    // }
+    //
+    // function act3(value, time) {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             console.log('3 Sleeping');
+    //             if (value) {
+    //                 resolve('All is good, continue...');
+    //             } else {
+    //                 reject('ERROR, mission abort..');
+    //             }
+    //         }, time);
+    //     });
+    // }
+    //
+    // act1(true, 2000)
+    //     .then(() => act2(true, 1000))
+    //     .then(() => act3(true, 500))
+    //     .catch(data => console.log(data))
+    //     .finally(() => console.log('TheEnd'));
+
+
+    // // Async/await
+    //
+    // function act1(value, time) {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             console.log('1 WakeUp');
+    //             if (value) {
+    //                 resolve('All is good, continue...');
+    //             } else {
+    //                 reject('ERROR, mission abort..');
+    //             }
+    //         }, time);
+    //     });
+    // }
+    //
+    // function act2(value, time) {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             console.log('2 Dinner');
+    //             if (value) {
+    //                 resolve('All is good, continue...');
+    //             } else {
+    //                 reject('ERROR, mission abort..');
+    //             }
+    //         }, time);
+    //     });
+    // }
+    //
+    // function act3(value, time) {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             console.log('3 Sleeping');
+    //             if (value) {
+    //                 resolve('All is good, continue...');
+    //             } else {
+    //                 reject('ERROR, mission abort..');
+    //             }
+    //         }, time);
+    //     });
+    // }
+    //
+    // async function someFn() {
+    //     try {
+    //         await act1(true, 2000);
+    //         await act2('Yes', 1000);
+    //         await act3(100500, 1500);
+    //         console.log('FinCheck');
+    //
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+    //
+    // someFn();
+
+
+</script>
+</body>
+</html>

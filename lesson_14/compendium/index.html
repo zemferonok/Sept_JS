@@ -17,6 +17,17 @@ CallBack function and Hell
 ConsoleTime
 Reduce
 
+Preview
+----------------------
+
+lecture
+----------------------
+
+<img src="EventLoop_1_1.jpeg" alt="pic1" style="width: 100%;">
+<img src="EventLoop_1_2.gif" alt="pic2" style="width: 100%;">
+<hr>
+<img src="EventLoop_2.gif" alt="pic3" style="width: 100%;">
+
 <script>
 
     // setTimeout function
@@ -27,16 +38,15 @@ Reduce
     //
     // console.log(2);         //Синхронно - сразу
     //
-    // setTimeout(() => {      //Принимает на вход callBack
+    // setTimeout(() => {      //Принимает на вход callBack fn
     //     console.log(3)      //Действие которое будет выполнено
     // }, 1000);               //Время задержки до выполнения
     ////Имитация асинхронной функция позволяющая выполнить некоторое действие с отсрочкой.
 
     //----------------------
 
-    //CallBack function, ?BadExample?
+    //CallBack function (EasyExample)
 
-    // //Вариация кривых? колл-беков
     // function timeOut_1(callBackFunc) {
     //     setTimeout(() => {
     //         console.log(1);
@@ -56,7 +66,7 @@ Reduce
     //     }, 1000);
     // }
     //
-    // //CallBack HELL???
+    // //CallBack HELL??? - Yes
     // timeOut_1(() => {
     //     timeOut_2(() => {
     //         timeOut_3(() => {
@@ -70,12 +80,15 @@ Reduce
     //CallBack function and hell
 
     // function someFn(value, callBack) {
-    //     console.log(value);
-    //     if (value > 0) {
-    //         callBack(null, 'All is good, continue...');
-    //     } else {
-    //         callBack('All is bad', null);
-    //     }
+    //     let timeMS = value * 1000;
+    //     setTimeout(() => {
+    //         console.log(value);
+    //         if (value > 0) {
+    //             callBack(null, 'All is good, continue...');
+    //         } else {
+    //             callBack('Bad numder, abort operation...', null);
+    //         }
+    //     }, timeMS);
     // }
     // //Структура callBack такова, что сперва передается ошибка, а затем данные.
     // //Это нужно для корректной отработки ошибки, при её наличии.
@@ -114,80 +127,49 @@ Reduce
 
     // Promise - then/catch/finally EXAMPLE
 
-    // function nameOfFunc(someVal) {
+    // function nameOfFunc(value) {
     //     return new Promise((resolve, reject) => {   //Для построения цепи Then.
     //         //Здесь пишем наш асинхронный код с использованием resolve, reject.
     //         //Как только выполнение кода доходит до resolve или reject,
     //         //дальнейшая работа с кодом прекращается.
     //         //Resolve и Reject - нечто вроде двух типов Return.
-    //         console.log('Im printing ' + someVal);
-    //         if (someVal) {
-    //             let someGodData = someVal + ' is Positive Answer!';
+    //         console.log('Im printing ' + value);
+    //         if (value) {
+    //             let someGodData = value + ' is Positive Answer!';
     //             resolve(someGodData);   //Positive answer of Promise
     //         } else {
-    //             let someBadData = someVal + ' is Negative Answer!';
+    //             let someBadData = value + ' is Negative Answer!';
     //             reject(someBadData);    //Negative answer of Promise
     //         }
     //     })
     // }
     //
     // nameOfFunc('Text')
-    //     .then(resVal => nameOfFunc(resVal)) //For transmitting in next need Return
-    //     .then(resVal => nameOfFunc(resVal)) //Catch Positive answer of Promise
-    //     .catch(rejVal => nameOfFunc(rejVal))    //Catch Negative answer of Promise
-    //     .finally(()=> console.log('FINAL'));   //Do this in any variant answer of Promise
+    //     .then(somRes => {               //Catch Positive answer of Promise
+    //         console.log(somRes);        //Log previous Resolve
+    //         return nameOfFunc(true);    //For transmitting in next need Return
+    //     })
+    //     .then(somRes => {
+    //         console.log(somRes);
+    //         return nameOfFunc(0);
+    //     })
+    //     .catch(somRej => {              //Catch Negative answer of Promise
+    //         console.log(somRej);
+    //         console.log('ERROR, mission abort...');
+    //     })                              //For Finally dont need Return
+    //     .finally(() => console.log('FINAL'));   //Do this in any variant answer of Promise
+    //
+    // nameOfFunc('Text')
+    //     .then(somRes => nameOfFunc(true))
+    //     .then(somRes => nameOfFunc(15))
+    //     .catch(somRej => console.log(somRej))
+    //     .finally(() => console.log('FINAL'));
     // //-По умолчанию для стрелочной функции на одно действие уже стоит Return.
     // //Return передает объект на вход следующего звена Then и активирует его.
     // //-Если на каком-либо из шагов получаем reject, дальнейшие звенья Then игнорируются.
     // //Catch отлавливает reject из любого места где он сработал.
 
     //----------------------------
-
-    // Promise - then/catch/finally ?BadExample?
-
-    // function eatFirst(food) {
-    //     return new Promise((resolve, reject) => {
-    //         setTimeout(() => {
-    //             console.log('At first eat ' + food);
-    //             resolve('All is good 1');      //Positive answer of Promise
-    //             reject('Error in 1');       //Negative answer of Promise
-    //         }, 3000);
-    //     })
-    // }
-    //
-    // function eatSecond(food) {
-    //     return new Promise((resolve, reject) => {
-    //         setTimeout(() => {
-    //             console.log('At second eat ' + food);
-    //             resolve('All is good 2');
-    //             reject('Error in 2');
-    //         }, 1000);
-    //     })
-    // }
-    //
-    // function eatThird(food) {
-    //     return new Promise((resolve, reject) => {
-    //         setTimeout(() => {
-    //             console.log('At third eat ' + food);
-    //             resolve('All is good 3');
-    //             reject('Error in 3');
-    //         }, 2000);
-    //     })
-    // }
-    //
-    // eatFirst('apple')
-    //     .then(resolveVal => {       //Catch Positive answer of Promise
-    //         console.log(resolveVal);
-    //         return eatSecond('tea');    //For transmitting in next Then use Return
-    //     })
-    //     .then(resolveVal => {
-    //         console.log(resolveVal);
-    //         return eatThird('meat');
-    //     })
-    //     .then(resolveVal => console.log(resolveVal))
-    //     .catch(rejectVal => console.log('AHAH LOL ' + rejectVal));  //Catch Negative answer of Promise
-
-    //--------------------
 
     //Async/await - try/catch
 
