@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+    let usersDiv = document.createElement('div');
+    usersDiv.classList.add('users');
+    document.body.appendChild(usersDiv);
+
+    fetch('https://jsonplaceholder.typicode.com/users')
+        .then(value => value.json())
+        .then(users => {
+            for (let user of users) {
+                let userDiv = document.createElement('div');
+                usersDiv.appendChild(userDiv);
+                userDiv.classList.add('user');
+                userDiv.innerText = `${user.id} - ${user.name} `;
+
+                let userLink = document.createElement('a');
+                userDiv.appendChild(userLink);
+                userLink.innerText = 'details';
+                userLink.href = `user_details.html?userId=${user.id}`;
+                userLink.target = '_blank';
+            }
+        });
+</script>
+</body>
+</html>

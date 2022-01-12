@@ -21,7 +21,9 @@ Preview
 ----------------------
 
 lecture
-----------------------
+https://www.youtube.com/watch?v=xL_QUcOzm2s&list=PLY1sAemBLA5y4bAQZGR6-eAyP2TD5l_Io&index=73
+---------------
+https://www.youtube.com/watch?v=UNqhL0c020o&list=PLY1sAemBLA5y4bAQZGR6-eAyP2TD5l_Io&index=74
 
 <img src="EventLoop_1_1.jpeg" alt="pic1" style="width: 100%;">
 <img src="EventLoop_1_2.gif" alt="pic2" style="width: 100%;">
@@ -30,8 +32,8 @@ lecture
 
 <script>
 
-    // setTimeout function
-
+    // // setTimeout function
+    //
     // setTimeout(() => {      //Асинхронно - через 2 сек
     //     console.log(1)
     // }, 2000);
@@ -45,8 +47,8 @@ lecture
 
     //----------------------
 
-    //CallBack function (EasyExample)
-
+    // //CallBack function (EasyExample)
+    //
     // function timeOut_1(callBackFunc) {
     //     setTimeout(() => {
     //         console.log(1);
@@ -77,8 +79,8 @@ lecture
     // timeOut_1(() => timeOut_2(() => timeOut_3(() => {})))
 
 
-    //CallBack function and hell
-
+    // //CallBack function and hell
+    //
     // function someFn(value, callBack) {
     //     let timeMS = value * 1000;
     //     setTimeout(() => {
@@ -125,8 +127,8 @@ lecture
 
     //--------------------------------
 
-    // Promise - then/catch/finally EXAMPLE
-
+    // // Promise - then/catch/finally EXAMPLE
+    //
     // function nameOfFunc(value) {
     //     return new Promise((resolve, reject) => {   //Для построения цепи Then.
     //         //Здесь пишем наш асинхронный код с использованием resolve, reject.
@@ -171,15 +173,16 @@ lecture
 
     //----------------------------
 
-    //Async/await - try/catch
-
+    // //Async/await - try/catch
+    //
     // function func1(value) {
     //     return new Promise((resolve, reject) => {
     //         setTimeout(() => {
-    //             if (value > 0) {
-    //                 resolve('Pos - ' + value);  //Positive answer of Promise
+    //             console.log('Action with ' + value);
+    //             if (value) {
+    //                 resolve(value + ' - Pos');  //Positive answer of Promise
     //             } else {
-    //                 reject('Neg - ' + value);   //Negative answer of Promise
+    //                 reject(value + ' - Neg');   //Negative answer of Promise
     //             }
     //         }, 3000);
     //     });
@@ -187,34 +190,32 @@ lecture
     //
     // async function someFunc() {
     //     try{    //Код с потенциальными ошибками
-    //         let val1 = await func1(2);
-    //         console.log('val1 is' + val1);
+    //         let val1 = await func1(2);      //Ждать окончания
+    //         console.log('resolve ' + val1); //Получить Resolve
     //         let val2 = await func1(1);
-    //         console.log('val2 is' + val2);
-    //         let val3 = await func1(0);
-    //         console.log('val3 is' + val3);
+    //         console.log('resolve ' + val2);
+    //         let val3 = await func1(true);
+    //         console.log('resolve ' + val3);
     //         let val4 = await func1(-1);
-    //         console.log('val4 is' + val4);
+    //         console.log('resolve ' + val4);
     //
-    //         console.log('Fin - 1');
-    //         console.log('Fin - 2');
-    //         console.log('Fin - 3');
-    //     } catch (somErr) {  //Ловит ошибки из Try
-    //         console.log('ERROR', somErr);
+    //         console.log('FinalCheck');
+    //     } catch (reject) {                  //Ловит ошибки из Try
+    //         console.log('ERROR', reject);
     //     }
     // }
     // //Async function, await - работает только для функций с Promise.
     // //Принципом работы не отличается от then/catch, лишь избавляет от них.
     // //Await - ждет завершения ф-ции, затем запускает следующую.
-    // // Таким образом асинхронный код выполняется как синхронный.
+    // //Таким образом асинхронный код выполняется как синхронный.
     //
     // someFunc();
 
     // ---------------------
 
-    //Early return pattern
-
-    // function earlyReturn(a, b) {
+    // //Early return pattern
+    //
+    // function compare(a, b) {
     //     if (a > b) {
     //         return 'A is bigger';
     //     }

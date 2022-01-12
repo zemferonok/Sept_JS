@@ -1,0 +1,108 @@
+body {
+    background: lightsteelblue;
+}
+
+.users {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.user {
+    border: 1px dashed black;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: lightpink;
+}
+
+
+
+.userDetails{
+    display: flex;
+    flex-direction: column;
+}
+
+.userDetails div {
+    border: 1px dashed black;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: lightpink;
+}
+
+.userDetails button {
+    width: 90%;
+    align-self: center;
+}
+
+/*Атрибут hidden не работает в комбинации с display:flex, такая бага.
+Простейший способ исправить ситуацию, добавить следующий код.
+Приставка !important позволяет вставить код в любой фрагмент документа.
+Она как-бы повышает приоритет данной команды и активирует её после всех.
+*/
+[hidden] {
+    display: none !important;
+}
+
+.postsTitles {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/*[hidden] {*/
+/*    display: none;*/
+/*}*/
+
+.postsTitles div {
+    border: 1px dashed black;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background: violet;
+    box-sizing: border-box;
+    width: 20%;
+}
+
+
+
+.postDetails{
+    display: flex;
+    flex-direction: column;
+}
+
+.postDetails div {
+    border: 1px dashed black;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: violet;
+}
+
+.postDetails button {
+    width: 90%;
+    align-self: center;
+}
+
+.comments {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/*[hidden] {*/
+/*    display: none;*/
+/*}*/
+
+.comments div {
+    border: 1px dashed black;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background: hotpink;
+    box-sizing: border-box;
+    width: 25%;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="userDetails">
+    <div>User Info</div>
+    <button>posts of current user</button>
+</div>
+<div class="postsTitles"></div>
+
+<script>
+    let url = new URL(location.href);
+    let userId = url.searchParams.get('userId')
+
+    let userWrap = document.getElementsByClassName('userDetails')[0];
+    let userInfo = userWrap.getElementsByTagName('div')[0];
+    let userButton = userWrap.getElementsByTagName('button')[0];
+    let postsTitles = document.getElementsByClassName('postsTitles')[0];
+    postsTitles.hidden = true;
+
+    fetch('https://jsonplaceholder.typicode.com/users' + '/' + userId)
+        .then(value => value.json())
+        .then(user => {
+            objectRecursion(user, userInfo);
+            // console.log('All UserInfo is Logged!')
+        });
+
+    fetch('https://jsonplaceholder.typicode.com/users' + '/' + userId + '/posts')
+        .then(value => value.json())
+        .then(posts => {
+            for (let post of posts) {
+                let title = document.createElement('div');
+                postsTitles.appendChild(title);
+                title.innerText = post.title + ' ';
+
+                let titleLink = document.createElement('a');
+                title.appendChild(titleLink);
+                titleLink.innerText = 'details';
+                titleLink.href = `post_details.html?postId=${post.id}`;
+                titleLink.target = '_blank';
+            }
+        });
+
+    userButton.onclick = (event) => {
+        // event.preventDefault();     //Can do not use without Forms
+        postsTitles.hidden = !postsTitles.hidden;
+    }
+
+    function objectRecursion(startElement, forAppend) {
+        if (typeof startElement === 'object') {
+            let list = document.createElement('ol');
+            forAppend.appendChild(list)
+            for (let key in startElement) {
+                let listElement = document.createElement('li');
+                list.appendChild(listElement);
+                if (typeof startElement[key] !== 'object') {
+                    listElement.innerText = key + ' - ' + startElement[key];
+                } else {
+                    listElement.innerText = key + ' - вложенность';
+                    objectRecursion(startElement[key], listElement);
+                }
+            }
+        } else {    //Delete before sending
+            let h1 = document.createElement('h1');
+            h1.innerText = startElement + ' is not object but ' + typeof startElement;
+            forAppend.appendChild(h1);
+            console.log('огненная жэпка');
+        }
+    }
+</script>
+</body>
+</html>

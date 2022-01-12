@@ -24,22 +24,24 @@
     //
     // function act1(value, callback) {
     //     setTimeout(() => {
-    //             console.log('1 Проснулся');
+    //         console.log('1 Проснулся');
+    //         if (!value) {
+    //             return callback('Error, trouble with WakeUp!', null);
+    //         }
     //         if (value) {
-    //             callback(null, 'Wake up is done. Work next..');
-    //         } else {
-    //             callback('Error, trouble with WakeUp!');
+    //             return callback(null, 'Wake up is done. Work next..');
     //         }
     //     }, 3000);
     // }
     //
     // function act2(value, callback) {
     //     setTimeout(() => {
-    //             console.log('2 Позавтракал');
+    //         console.log('2 Позавтракал');
+    //         if (!value) {
+    //             return  callback('Error, trouble with Dinner!', null);
+    //         }
     //         if (value) {
-    //             callback(null, 'Dinner is done. Work next..');
-    //         } else {
-    //             callback('Error, trouble with Dinner!');
+    //             return callback(null, 'Dinner is done. Work next..');
     //         }
     //     }, 5000);
     // }
@@ -47,10 +49,11 @@
     // function act3(value, callback) {
     //     setTimeout(() => {
     //             console.log('3 Лег спать');
-    //         if (value) {
-    //             callback(null, 'Sleeping is done. Work next..');
-    //         } else {
+    //         if (!value) {
     //             callback('Error, trouble with Sleeping!');
+    //         }
+    //         if (value) {
+    //             return callback(null, 'Sleeping is done. Work next..', null);
     //         }
     //     }, 2000);
     // }

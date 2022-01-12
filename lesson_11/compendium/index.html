@@ -17,8 +17,11 @@ Lesson 11       BOM JSON (S,L)storage Cookie
 Preview
 https://www.youtube.com/watch?v=UFd-Zbs60Rg&list=PLY1sAemBLA5xf0kkqvQ5coPc6ReTwCR7q&index=11
 
-lecture
+Lecture
 https://www.youtube.com/watch?v=1ujbtshYK30&list=PLY1sAemBLA5y4bAQZGR6-eAyP2TD5l_Io&index=65
+
+moreAboutURL
+https://www.youtube.com/watch?v=2I8UDBnmaCM
 
 <script>
     // BOM - Browser Object Model
@@ -31,10 +34,20 @@ https://www.youtube.com/watch?v=1ujbtshYK30&list=PLY1sAemBLA5y4bAQZGR6-eAyP2TD5l
     // Window -  глобальных объект браузера.
     // Т.к. объект Window глобальный, обращаться к нему не обязательно, можно сразу обращаться к подобъекту.
 
-    // Работа с ссылкой
-    let url = new URL(location.href);
-    let searchDirty = url.search;
-    let search = searchDirty.slice(1);
+    // Работа с ссылкой URL
+    location.href = 'Page2.html?id=1&name=John';    //Передача Параметров
+    console.log(location.href);                     //Вывести текущий URL
+    let url = new URL(location.href);               //Объект текущей URL
+    let searchDirty = url.search;                   //Параметры текущей URL
+    let search = searchDirty.slice(1);      //Избавится от (первого знака)/"?"
+    console.log(url.searchParams.get('id'));        //Вывести Параметр id
+    //-Передаваемые Параметры id & name дописываются к URL после знака "?".
+    //Параметров может быть сколько угодно, между собой они разделяются знаком "&".
+    //-Можно также передавать целые объекты данных, переведя их в строку.
+    // let object = {id: 1, name: 'John', status: true};
+    // let jsonObject = JSON.stringify(object);
+    // location.href = 'Page2.html?data=' + jsonObject;    //Передача данных
+    // https://learn.javascript.ru/url     //more about..
 
     // session storage
     console.log(sessionStorage);
