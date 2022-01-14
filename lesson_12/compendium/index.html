@@ -106,7 +106,7 @@ https://jsonplaceholder.typicode.com
     let wrap = document.getElementsByClassName('wrap')[0];
 
     select.onchange = function () {
-        let pageNumber = this.value;    //Номер страницы от селектора
+        let pageNumber = this.value;    //Значение, номер страницы от селектора
         fetch(`https://reqres.in/api/users?page=${pageNumber}`)
             .then(value => value.json())
             .then(value => {
