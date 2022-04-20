@@ -40,37 +40,42 @@ const ls = [51, 56, 58, 59, 61];
 const k = 3;
 const t = 174;
 
-const choseOptimalDistance = (maxDistance, count, distanceList) => {
-    if (distanceList.length < count) return null;
-    if (count < 1) return null;
+const choseOptimalDistance = (maxDistance, citiesCount, distanceList) => {
+    if (distanceList.length < citiesCount) return null;
+    if (citiesCount < 1) return null;
     if (maxDistance < 0) return null;
 
-
-    let allArr = [];
-    let tempArr = [];
-    for (let x = 0; x < distanceList.length; x++) {
-        tempArr[0] = (distanceList[x]);
-        for (let y = x + 1; y < distanceList.length; y++) {
-            tempArr[1] = (distanceList[y]);
-            for (let z = y + 1; z < distanceList.length; z++) {
-                tempArr[2] = (distanceList[z]);
-                allArr.push(tempArr.slice(0));
-                document.write(JSON.stringify(tempArr) + '<br>');
+    function getAllCombinations(list, k) {
+        let k1 = k;
+        if(k1 === 1){
+            return list.map(x => [x]);
+        }
+        let variants = [];
+        for(let i = 0; i <= (list.length-k1); i++){
+            let nextvariants = getAllCombinations(list.slice(i+1), k1-1)
+            for(let j = 0; j < nextvariants.length; j++){
+                variants.push(nextvariants[j].concat([list[i]]))
             }
         }
+        return variants;
     }
 
-    // How to recursion 51-61
+    let allVariants = getAllCombinations(distanceList, citiesCount)
 
-    let finDistance = 0;
-    for (const array of allArr) {
-        const sum = array.reduce((previousVal, currentValue) => previousVal + currentValue, 0);
-        if (sum > finDistance && sum <= maxDistance) finDistance = sum;
+    let finDistance = -1;
+    for (const variant of allVariants) {
+        const variantDistance = variant.reduce((previousVal, currentValue) => previousVal + currentValue, 0);
+        if (variantDistance > finDistance && variantDistance <= maxDistance) finDistance = variantDistance;
     }
-    if (finDistance) {
+    if (finDistance >= 0) {
         return finDistance
     }
-    return 'ИдиНаХуй';
+    return 'Шлях не знайдено';
 }
-// document.write(JSON.stringify(choseOptimalDistance(t, k, ls)))
-document.write(JSON.stringify(choseOptimalDistance(65, 3, [10, 20, 30, 40, 50])))
+document.write(JSON.stringify(choseOptimalDistance(t, k, ls)))
+document.write(JSON.stringify(choseOptimalDistance(65, 4, [1, 2, 3, 4, 5])))
+
+
+
+
+
